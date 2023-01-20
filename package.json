@@ -2,7 +2,7 @@
   "name": "rp-consumer",
   "displayName": "Riverpod Consumer",
   "description": "Adds wrap with Consumer code action.",
-  "version": "0.1.0",
+  "version": "0.0.2",
   "publisher": "GaganYadav",
   "bugs": {
     "url": "https://github.com/gaganyadav80/rp-consumer/issues",
@@ -32,15 +32,56 @@
   ],
   "main": "./dist/extension",
   "contributes": {
-    "configuration": [],
+    "configuration": [
+      {
+        "title": "rp-consumer",
+        "properties": {
+          "rp-consumer.newNotifierTemplate.createDirectory": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to create a notifier directory when creating a new notifier."
+          }
+        }
+      }
+    ],
     "commands": [
+      {
+        "command": "extension.new-notifier",
+        "title": "RP Consumer: New Notifier",
+        "icon": "assets/logo-icon.png"
+      },
+      {
+        "command": "extension.new-stateless-file",
+        "title": "RP Consumer: New Stateless File",
+        "icon": "assets/logo-icon.png"
+      },
       {
         "command": "extension.wrap-consumer",
         "title": "Wrap with Consumer"
+      },
+      {
+        "command": "extension.remove-consumer",
+        "title": "Remove Consumer"
       }
     ],
     "menus": {
+      "explorer/context": [
+        {
+          "command": "extension.new-stateless-file",
+          "group": "rpConsumerGroup@1",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "extension.new-notifier",
+          "group": "rpConsumerGroup@1",
+          "when": "explorerResourceIsFolder"
+        }
+      ],
       "commandPalette": [
+        {
+          "command": "extension.remove-consumer",
+          "when": "editorLangId == dart"
+        },
         {
           "command": "extension.wrap-consumer",
           "when": "editorLangId == dart"
