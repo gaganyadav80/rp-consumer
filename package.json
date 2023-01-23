@@ -2,7 +2,7 @@
   "name": "rp-consumer",
   "displayName": "Riverpod Consumer",
   "description": "Adds wrap with Consumer code action.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "publisher": "GaganYadav",
   "bugs": {
     "url": "https://github.com/gaganyadav80/rp-consumer/issues",
