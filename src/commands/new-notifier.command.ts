@@ -13,12 +13,14 @@ import { existsSync, lstatSync, writeFile } from "fs";
 import { getNotifierStateTemplate, getNotifierTemplate } from "../templates";
 
 export const newNotifier = async (uri: Uri) => {
+  console.log('Step 1');
   const notifierName = await promptForNotifierName();
   if (_.isNil(notifierName) || notifierName.trim() === "") {
     window.showErrorMessage("The notifier name must not be empty");
     return;
   }
 
+  console.log('Step 2 - uri: ', uri);
   let targetDirectory;
   if (_.isNil(_.get(uri, "fsPath")) || !lstatSync(uri.fsPath).isDirectory()) {
     targetDirectory = await promptForTargetDirectory();
@@ -30,6 +32,7 @@ export const newNotifier = async (uri: Uri) => {
     targetDirectory = uri.fsPath;
   }
 
+  console.log('Step 3 - targetDirectory: ', targetDirectory);
   const pascalCaseNotifierName = changeCase.pascalCase(notifierName);
   try {
     await generateNotifierCode(notifierName, targetDirectory);
@@ -77,12 +80,17 @@ async function generateNotifierCode(
   const shouldCreateDirectory = workspace
     .getConfiguration("rp-consumer")
     .get<boolean>("newNotifierTemplate.createDirectory");
+  console.log('step 4 - shouldCreateDirectory: ', shouldCreateDirectory);
   const notifierDirectoryPath = shouldCreateDirectory
     ? `${targetDirectory}/notifier`
     : targetDirectory;
   if (!existsSync(notifierDirectoryPath)) {
     await createDirectory(notifierDirectoryPath);
   }
+
+  console.log('step 5 - path: ', notifierDirectoryPath);
+  console.log('step 6 - exists: ', existsSync(notifierDirectoryPath));
+
 
   await Promise.all([
     createNotifierStateTemplate(notifierName, notifierDirectoryPath),
@@ -92,11 +100,10 @@ async function generateNotifierCode(
 
 function createDirectory(targetDirectory: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    mkdirp(targetDirectory).then((error) => {
-      if (error) {
-        return reject(error);
-      }
+    mkdirp(targetDirectory).then((_) => {
       resolve();
+    }).catch((error) => {
+      return reject(error);
     });
   });
 }

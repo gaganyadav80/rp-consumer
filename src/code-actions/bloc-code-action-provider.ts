@@ -1,7 +1,7 @@
 import { window, CodeAction, CodeActionProvider, CodeActionKind } from "vscode";
 import { getSelectedText } from "../utils";
 
-const consumerRegExp = new RegExp("^Consumer\\(.*\\)", "ms");
+const consumerRegExp = new RegExp("^Consumer*\\(.*\\)", "ms");
 
 export class ConsumerCodeActionProvider implements CodeActionProvider {
   public provideCodeActions(): CodeAction[] {

@@ -18,8 +18,8 @@ abstract class ${pascalCaseNotifierName}State extends Equatable {
   List<Object?> get props => <Object>[];
 }
 
-class ${pascalCaseNotifierName}Initial extends ${pascalCaseNotifierName}State {
-  const ${pascalCaseNotifierName}Initial();
+class ${pascalCaseNotifierName}InitialState extends ${pascalCaseNotifierName}State {
+  const ${pascalCaseNotifierName}InitialState();
 }
 `;
 }
