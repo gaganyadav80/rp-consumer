@@ -22,7 +22,7 @@ final StateNotifierProvider<${pascalCaseNotifierName}Notifier, ${notifierState}>
 );
 
 class ${pascalCaseNotifierName}Notifier extends StateNotifier<${notifierState}> {
-  ${pascalCaseNotifierName}Notifier() : super(const ${pascalCaseNotifierName}Initial());
+  ${pascalCaseNotifierName}Notifier() : super(const ${pascalCaseNotifierName}InitialState());
 }
 `;
 }
