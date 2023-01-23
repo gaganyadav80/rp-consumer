@@ -1,5 +1,4 @@
 import * as changeCase from "change-case";
-// import { BlocType } from "../utils";
 
 export function getNotifierTemplate(notifierName: string): string {
     return getEquatableNotifierTemplate(notifierName);

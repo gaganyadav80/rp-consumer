@@ -1,1 +1,1 @@
-export * from "./bloc-code-action-provider";
+export * from "./consumer-code-action-provider";
